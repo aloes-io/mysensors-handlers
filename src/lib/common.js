@@ -11,14 +11,31 @@
  */
 
 /**
- * References used to validate payloads
+ * MySensors Serial API
+ * @external MySensorsAPI
+ * @see {@link https://www.mysensors.org/download/serial_api_20}
+ */
+
+/**
+ * References used to validate [MySensors]{@link /mysensors/#mysensorsapi} payloads
  * @namespace
- * @property {string}  pattern - The pattern used by MySensors devices.
+ * @property {string}  pattern - The pattern used by [MySensors]{@link /mysensors/#mysensorsapi} MQTT devices.
  * @property {object}  validators - Check inputs / build outputs
  * @property {array}   validators.nodeId
  * @property {array}   validators.methods - [0, 1, 2, 3, 4].
  * @property {array}   labelsPresentation - Labels used by Mysensors to identify sensor type in presentation commands.
+ * @property {string}  labelsPresentation[0].Type - [MySensors]{@link /mysensors/#mysensorsapi} Type
+ * @property {int}     labelsPresentation[0].value - MySensors Type value ( used by transport )
+ * @property {int}     labelsPresentation[0].omaObject - [OMA Object]{@link /mysensors/#omaobjects} ID
+ * @property {string}  labelsPresentation[0].description - MySensors Type description
+ * @property {string}  labelsPresentation[0].resources - MySensors variable subtype used by this type
  * @property {array}   labelsSet - Labels used by Mysensors to identify sensor type in Set/req commands.
+ * @property {string}  labelsSet[0].Type - MySensors subtype
+ * @property {int}     labelsSet[0].value - MySensors Subype value ( used by transport )
+ * @property {object}  labelsSet[0].omaResources - [OMA Resources]{@link /mysensors/#omaresources} attached to `labelsPresentation[0].omaObject`
+ * @property {string}  labelsSet[0].Unit - Sensor value unit
+ * @property {string}  labelsSet[0].description - MySensors Subtype description
+ * @property {string}  labelsSet[0].sensorTypes - MySensors Type using this variable
  */
 const protocolRef = {
   pattern: '+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType',

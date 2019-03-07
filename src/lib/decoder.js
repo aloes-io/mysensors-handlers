@@ -3,11 +3,9 @@ import {omaObjects, omaViews} from 'oma-json';
 import {logger} from '../logger';
 import protocolRef from './common';
 
-/** @module mySensorsDecoder */
-
 /**
- * Find corresponding OMA object following a MySensors presentation message
- * @static
+ * Find corresponding [OMA object]{@link /mysensors/#omaobjects} following a MySensors presentation message
+ * @method mySensorsToOmaObject
  * @param {object} msg - Decoded MQTT packet.
  * @returns {object} composed instance
  */
@@ -38,8 +36,8 @@ const mySensorsToOmaObject = msg => {
 };
 
 /**
- * Find corresponding OMA resource to incoming MySensors datas
- * @static
+ * Find corresponding [OMA resource]{@link /mysensors/#omaresources} to incoming MySensors datas
+ * @method mySensorsToOmaResources
  * @param {object} msg - Decoded MQTT packet.
  * @returns {object} composed instance
  */
@@ -72,6 +70,7 @@ const mySensorsToOmaResources = msg => {
 /**
  * Convert incoming MySensors data to Aloes Client
  * pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
+ * @method mySensorsDecoder
  * @param {object} packet - Incoming MQTT packet.
  * @param {object} protocol - Protocol paramters ( coming from patternDetector ).
  * @returns {object} composed instance

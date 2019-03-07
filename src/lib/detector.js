@@ -2,11 +2,10 @@ import mqttPattern from 'mqtt-pattern';
 import {logger} from '../logger';
 import protocolRef from './common';
 
-/** @module mySensorsPatternDetector */
-
 /**
- * Check incoming MQTT packet against MySensors Serial API
+ * Check incoming MQTT packet against [MySensors Serial API]{@link /mysensors/#mysensorsapi}
  * pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
+ * @mthod mySensorsPatternDetector
  * @param {object} packet - The MQTT packet.
  * @returns {object} found pattern.name and pattern.params
  */

@@ -2,11 +2,10 @@ import mqttPattern from 'mqtt-pattern';
 import {logger} from '../logger';
 import protocolRef from './common';
 
-/** @module mySensorsEncoder */
-
 /**
- * Convert incoming Aloes Client data to MySensors protocol
+ * Convert incoming Aloes Client data to [MySensors protocol]{@link /mysensors/#mysensorsapi}
  * pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
+ * @method mySensorsEncoder
  * @param {object} packet - Sensor instance.
  * @param {object} protocol - Protocol paramters ( coming from patternDetector ).
  */
