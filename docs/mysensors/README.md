@@ -2,7 +2,7 @@
 
 <dl>
 <dt><a href="#protocolRef">protocolRef</a> : <code>object</code></dt>
-<dd><p>References used to validate  <a href="/mysensors/#mysensorsapi">MySensors</a>  payloads</p>
+<dd><p>References used to validate <a href="/mysensors/#mysensorsapi">MySensors</a> payloads</p>
 </dd>
 </dl>
 
@@ -20,11 +20,11 @@
 pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType&quot;</p>
 </dd>
 <dt><a href="#mySensorsPatternDetector">mySensorsPatternDetector(packet)</a> ⇒ <code>object</code></dt>
-<dd><p>Check incoming MQTT packet against <a href="/mysensors/#mysensorsapi">MySensors</a> Serial API
+<dd><p>Check incoming MQTT packet against <a href="/mysensors/#mysensorsapi">MySensors Serial API</a>
 pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType&quot;</p>
 </dd>
 <dt><a href="#mySensorsEncoder">mySensorsEncoder(packet, protocol)</a></dt>
-<dd><p>Convert incoming Aloes Client data to <a href="/mysensors/#mysensorsapi">MySensors</a> protocol
+<dd><p>Convert incoming Aloes Client data to <a href="/mysensors/#mysensorsapi">MySensors protocol</a>
 pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType&quot;</p>
 </dd>
 </dl>
@@ -46,14 +46,14 @@ pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType&quot;</p
 <a name="protocolRef"></a>
 
 ## protocolRef : <code>object</code>
-References used to validate  [MySensors](/mysensors/#mysensorsapi)  payloads
+References used to validate [MySensors](/mysensors/#mysensorsapi) payloads
 
 **Kind**: global namespace  
 **Properties**
 
 | Name | Type | Description |
 | --- | --- | --- |
-| pattern | <code>string</code> | The pattern used by [MySensors](/mysensors/#mysensorsapi) devices. |
+| pattern | <code>string</code> | The pattern used by [MySensors](/mysensors/#mysensorsapi) MQTT devices. |
 | validators | <code>object</code> | Check inputs / build outputs |
 | validators.nodeId | <code>array</code> |  |
 | validators.methods | <code>array</code> | [0, 1, 2, 3, 4]. |
@@ -112,7 +112,7 @@ pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
 <a name="mySensorsPatternDetector"></a>
 
 ## mySensorsPatternDetector(packet) ⇒ <code>object</code>
-Check incoming MQTT packet against [MySensors](/mysensors/#mysensorsapi) Serial API
+Check incoming MQTT packet against [MySensors Serial API](/mysensors/#mysensorsapi)
 pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
 
 **Kind**: global function  
@@ -126,7 +126,7 @@ pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
 <a name="mySensorsEncoder"></a>
 
 ## mySensorsEncoder(packet, protocol)
-Convert incoming Aloes Client data to [MySensors](/mysensors/#mysensorsapi) protocol
+Convert incoming Aloes Client data to [MySensors protocol](/mysensors/#mysensorsapi)
 pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
 
 **Kind**: global function  

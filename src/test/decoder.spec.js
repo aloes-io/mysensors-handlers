@@ -13,6 +13,8 @@ describe('mySensorsDecoder - test 1', () => {
   const decoded = mySensorsDecoder(packet, params);
   const keys = [
     'devEui',
+    'transportProtocol',
+    'messageProtocol',
     'nativeSensorId',
     'nativeNodeId',
     'nativeResource',
@@ -65,6 +67,8 @@ describe('mySensorsDecoder - test 2', () => {
   const keys = [
     'name',
     'devEui',
+    'transportProtocol',
+    'messageProtocol',
     'type',
     'nativeSensorId',
     'nativeNodeId',
@@ -117,6 +121,8 @@ describe('mySensorsDecoder - test 3', () => {
   const decoded = mySensorsDecoder(packet, params);
   const keys = [
     'devEui',
+    'transportProtocol',
+    'messageProtocol',
     'nativeSensorId',
     'nativeNodeId',
     'nativeResource',

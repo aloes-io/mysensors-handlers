@@ -90,6 +90,8 @@ const mySensorsDecoder = (packet, protocol) => {
         ...protocol,
         prefixedDevEui: `${gatewayIdParts[0]}${inPrefix}`,
       };
+      decoded.messageProtocol = 'mySensors';
+      decoded.transportProtocol = 'mySensors';
       decoded.inPrefix = inPrefix;
       decoded.outPrefix = outPrefix;
       decoded.prefix = gatewayIdParts[1];
