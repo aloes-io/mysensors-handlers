@@ -4,7 +4,7 @@ import {assert} from 'chai';
 import {mySensorsDecoder} from '../lib/decoder';
 import {mySensorsPatternDetector} from '../lib/detector';
 
-//  const mySensorsPattern = "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType";
+//  const mySensorsPattern = "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type";
 
 describe('mySensorsDecoder - test 1', () => {
   const packet = {topic: 'MySensors123-out/0/2/1/0/4', payload: 'test'};

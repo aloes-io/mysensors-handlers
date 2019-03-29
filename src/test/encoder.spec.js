@@ -4,7 +4,7 @@ import {assert} from 'chai';
 import {mySensorsEncoder} from '../lib/encoder';
 import {mySensorsPatternDetector} from '../lib/detector';
 
-//  const mySensorsPattern = "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType";
+//  const mySensorsPattern = "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type";
 
 describe('mySensorsEncoder - test 1', () => {
   let packet = {topic: 'MySensors123-in/0/2/1/0/4', payload: 'test'};
@@ -23,12 +23,12 @@ describe('mySensorsEncoder - test 1', () => {
       inputPath: `${pattern.params.prefixedDevEui.split('-')[0]}-in/${
         pattern.params.nodeId
       }/${pattern.params.sensorId}/${pattern.params.method}/1/${
-        pattern.params.subType
+        pattern.params.type
       }`,
       outputPath: `${pattern.params.prefixedDevEui.split('-')[0]}-out/${
         pattern.params.nodeId
       }/${pattern.params.sensorId}/${pattern.params.method}/1/${
-        pattern.params.subType
+        pattern.params.type
       }`,
       inPrefix: '-in',
       outPrefix: '-out',
@@ -83,12 +83,12 @@ describe('mySensorsEncoder - test 2', () => {
       inputPath: `${pattern.params.prefixedDevEui.split('-')[0]}-in/${
         pattern.params.nodeId
       }/${pattern.params.sensorId}/${pattern.params.method}/1/${
-        pattern.params.subType
+        pattern.params.type
       }`,
       outputPath: `${pattern.params.prefixedDevEui.split('-')[0]}-out/${
         pattern.params.nodeId
       }/${pattern.params.sensorId}/${pattern.params.method}/1/${
-        pattern.params.subType
+        pattern.params.type
       }`,
       inPrefix: '-in',
       outPrefix: '-out',
@@ -143,12 +143,12 @@ describe('mySensorsEncoder - test 3', () => {
       inputPath: `${pattern.params.prefixedDevEui.split('-')[0]}-in/${
         pattern.params.nodeId
       }/${pattern.params.sensorId}/${pattern.params.method}/1/${
-        pattern.params.subType
+        pattern.params.type
       }`,
       outputPath: `${pattern.params.prefixedDevEui.split('-')[0]}-out/${
         pattern.params.nodeId
       }/${pattern.params.sensorId}/${pattern.params.method}/1/${
-        pattern.params.subType
+        pattern.params.type
       }`,
       inPrefix: '-in',
       outPrefix: '-out',

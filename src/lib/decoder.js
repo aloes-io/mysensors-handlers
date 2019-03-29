@@ -11,14 +11,13 @@ import protocolRef from './common';
  */
 const mySensorsToOmaObject = msg => {
   try {
-    logger(2, 'handlers', 'mySensorsToOmaObject:req', msg);
+    logger(4, 'mysensors-handlers', 'toOmaObject:req', msg);
     if (!msg || msg == null || msg.sensorId === 255 || msg.type === null) {
-      return 'Wrong instance input';
+      throw new Error('Wrong instance input');
     }
     const foundOmaObject = omaObjects.find(object => object.value === msg.type);
-    if (!foundOmaObject) return 'no OMA Object found';
+    if (!foundOmaObject) throw new Error('no OMA Object found');
     const foundOmaViews = omaViews.find(object => object.value === msg.type);
-
     const decoded = {
       ...msg,
       name: foundOmaObject.name,
@@ -27,11 +26,11 @@ const mySensorsToOmaObject = msg => {
       resources: foundOmaObject.resources,
       frameCounter: 0,
     };
-    logger(4, 'handlers', 'mySensorsToOmaObject:res', decoded);
+    logger(3, 'mysensors-handlers', 'toOmaObject:res', decoded);
     return decoded;
   } catch (error) {
-    logger(2, 'handlers', 'mySensorsToOmaObject:err', error);
-    throw error;
+    logger(2, 'mysensors-handlers', 'toOmaObject:err', error);
+    return error;
   }
 };
 
@@ -43,9 +42,9 @@ const mySensorsToOmaObject = msg => {
  */
 const mySensorsToOmaResources = msg => {
   try {
-    logger(2, 'handlers', 'mySensorsToOmaResources:req', msg);
+    logger(4, 'mysensors-handlers', 'toOmaResources:req', msg);
     if (!msg || msg == null || msg.sensorId === 255 || !msg.nativeResource) {
-      return 'Wrong instance input';
+      throw new Error('Wrong instance input');
     }
     const baseResources =
       protocolRef.labelsSet[msg.nativeResource].omaResources;
@@ -56,20 +55,21 @@ const mySensorsToOmaResources = msg => {
     if (Object.prototype.hasOwnProperty.call(msg.resources, resourcesKeys[0])) {
       msg.resource = resourcesKeys[0];
     }
+    if (!msg.resource) throw new Error('no OMA Resource found');
     const decoded = {
       ...msg,
     };
-    logger(4, 'handlers', 'mySensorsToOmaResources:res', decoded);
+    logger(3, 'mysensors-handlers', 'toOmaResources:res', decoded);
     return decoded;
   } catch (error) {
-    logger(2, 'handlers', 'mySensorsToOmaResources:err', error);
-    throw error;
+    logger(2, 'mysensors-handlers', 'toOmaResources:err', error);
+    return error;
   }
 };
 
 /**
  * Convert incoming MySensors data to Aloes Client
- * pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
+ * pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
  * @method mySensorsDecoder
  * @param {object} packet - Incoming MQTT packet.
  * @param {object} protocol - Protocol paramters ( coming from patternDetector ).
@@ -79,9 +79,9 @@ const mySensorsToOmaResources = msg => {
 const mySensorsDecoder = (packet, protocol) => {
   const decoded = {};
   try {
-    logger(4, 'handlers', 'mySensorsDecoder:req', protocol);
+    logger(4, 'mysensors-handlers', 'decoder:req', protocol);
     const protocolKeys = Object.getOwnPropertyNames(protocol);
-    if (protocolKeys.length === 6) {
+    if (protocolKeys && protocolKeys.length === 6) {
       let decodedPayload;
       const gatewayIdParts = protocol.prefixedDevEui.split('-');
       const inPrefix = protocolRef.validators.directions[0];
@@ -98,14 +98,13 @@ const mySensorsDecoder = (packet, protocol) => {
       decoded.devEui = gatewayIdParts[0];
       //  decoded.deviceId = gatewayIdParts[0];
       decoded.lastSignal = new Date();
-
       switch (Number(protocol.method)) {
         case 0: // Presentation
           decoded.nativeNodeId = protocol.nodeId;
           decoded.nativeSensorId = protocol.sensorId;
           decoded.type =
-            protocolRef.labelsPresentation[Number(protocol.subType)].omaObject;
-          decoded.nativeType = Number(protocol.subType);
+            protocolRef.labelsPresentation[Number(protocol.type)].omaObject;
+          decoded.nativeType = Number(protocol.type);
           decoded.value = packet.payload.toString();
           decoded.method = 'HEAD';
           decodedPayload = mySensorsToOmaObject(decoded);
@@ -116,7 +115,7 @@ const mySensorsDecoder = (packet, protocol) => {
           decoded.outputPath = mqttPattern.fill(protocolRef.pattern, params);
           decoded.nativeNodeId = protocol.nodeId;
           decoded.nativeSensorId = protocol.sensorId;
-          decoded.nativeResource = Number(protocol.subType);
+          decoded.nativeResource = Number(protocol.type);
           decoded.value = packet.payload;
           decoded.method = 'POST';
           decodedPayload = mySensorsToOmaResources(decoded);
@@ -124,20 +123,20 @@ const mySensorsDecoder = (packet, protocol) => {
         case 2: // Req
           decoded.nativeNodeId = protocol.nodeId;
           decoded.nativeSensorId = protocol.sensorId;
-          decoded.nativeResource = Number(protocol.subType);
+          decoded.nativeResource = Number(protocol.type);
           decoded.method = 'GET';
           decodedPayload = decoded;
           break;
         case 3: // Internal
           decoded.nativeNodeId = protocol.nodeId;
           decoded.nativeSensorId = protocol.sensorId;
-          decoded.type = Number(protocol.subType);
+          decoded.internalType = Number(protocol.type);
           decoded.value = packet.payload.toString();
           break;
         case 4: // Stream - OTA firmware update
           decoded.nativeNodeId = protocol.nodeId;
           decoded.nativeSensorId = protocol.sensorId;
-          decoded.nativeResource = Number(protocol.subType);
+          decoded.nativeResource = Number(protocol.type);
           decoded.value = packet.payload;
           decoded.method = 'STREAM';
           decodedPayload = decoded;
@@ -145,12 +144,13 @@ const mySensorsDecoder = (packet, protocol) => {
         default:
           break;
       }
+      logger(3, 'mysensors-handlers', 'decoder:res', decodedPayload);
       return decodedPayload;
     }
-    return "topic doesn't match";
+    throw new Error("topic doesn't match");
   } catch (error) {
-    logger(2, 'handlers', 'mySensorsDecoder:err', error);
-    throw error;
+    logger(2, 'mysensors-handlers', 'decoder:err', error);
+    return error;
   }
 };
 

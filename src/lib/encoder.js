@@ -4,12 +4,11 @@ import protocolRef from './common';
 
 /**
  * Convert incoming Aloes Client data to [MySensors protocol]{@link /mysensors/#mysensorsapi}
- * pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
+ * pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
  * @method mySensorsEncoder
  * @param {object} packet - Sensor instance.
  * @param {object} protocol - Protocol paramters ( coming from patternDetector ).
  */
-
 const mySensorsEncoder = (instance, protocol) => {
   try {
     if (
@@ -22,9 +21,9 @@ const mySensorsEncoder = (instance, protocol) => {
         prefixedDevEui: `${instance.devEui}${instance.inPrefix}`,
         nodeId: instance.nativeNodeId,
         sensorId: instance.nativeSensorId,
-        subType: instance.nativeResource,
+        type: instance.nativeResource,
       };
-      logger(4, 'handlers', 'mySensorsEncoder:req', params);
+      logger(4, 'mysensors-handlers', 'encoder:req', params);
       if (protocol.method === 'HEAD') {
         params.method = 0;
         params.ack = 0;
@@ -38,13 +37,16 @@ const mySensorsEncoder = (instance, protocol) => {
         params.ack = 0;
         topic = mqttPattern.fill(protocolRef.pattern, params);
       }
-      if (!topic || topic === null) return 'Method not supported yet';
-      logger(4, 'handlers', 'mySensorsEncoder:res', topic);
+      if (!topic || topic === null) {
+        //  err = Error({message: 'Method not supported yet'});
+        throw new Error('Method not supported yet');
+      }
+      logger(3, 'mysensors-handlers', 'encoder:res', topic);
       return {topic, payload: instance.value};
     }
-    return new Error('Error: Wrong protocol input');
+    throw new Error('Wrong protocol input');
   } catch (error) {
-    logger(4, 'handlers', 'mySensorsEncoder:err', error);
+    logger(3, 'mysensors-handlers', 'encoder:err', error);
     return error;
   }
 };

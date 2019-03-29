@@ -38,12 +38,12 @@
  * @property {string}  labelsSet[0].sensorTypes - MySensors Type using this variable
  */
 const protocolRef = {
-  pattern: '+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType',
+  pattern: '+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type',
   validators: {
     userId: 'string',
     nodeId: 'number',
     sensorId: 'number',
-    subType: 'number',
+    type: 'number',
     methods: [0, 1, 2, 3, 4],
     directions: ['-in', '-out'],
   },

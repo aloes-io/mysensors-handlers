@@ -3,7 +3,7 @@ require('@babel/register');
 import {assert} from 'chai';
 import {mySensorsPatternDetector} from '../lib/detector';
 
-//  const mySensorsPattern = "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType";
+//  const mySensorsPattern = "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type";
 
 describe('mySensorsPatternDetector - test 1', () => {
   const packet = {topic: 'MySensors123-out/0/2/1/0/4', payload: 'test'};
@@ -15,7 +15,7 @@ describe('mySensorsPatternDetector - test 1', () => {
     'prefixedDevEui',
     'method',
     'ack',
-    'subType',
+    'type',
   ];
 
   it('pattern should exist', () => {
@@ -45,7 +45,7 @@ describe('mySensorsPatternDetector - test 2', () => {
     'prefixedDevEui',
     'method',
     'ack',
-    'subType',
+    'type',
   ];
 
   it('pattern should exist', () => {
@@ -75,7 +75,7 @@ describe('mySensorsPatternDetector - test 3', () => {
     'prefixedDevEui',
     'method',
     'ack',
-    'subType',
+    'type',
   ];
 
   it('pattern should exist', () => {

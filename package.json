@@ -6,9 +6,9 @@
   "unpkg": "mysensors-handlers.min.js",
   "scripts": {
     "lint": "npx eslint --ext js .",
-    "test:mysensors-detector": "mocha --require @babel/register ./src/test/detector.spec.js",
-    "test:mysensors-decoder": "mocha --require @babel/register ./src/test/decoder.spec.js",
-    "test:mysensors-encoder": "mocha --require @babel/register ./src/test/encoder.spec.js",
+    "test:mysensors-detector": "export NODE_ENV=test; mocha --require @babel/register ./src/test/detector.spec.js",
+    "test:mysensors-decoder": "export NODE_ENV=test; mocha --require @babel/register ./src/test/decoder.spec.js",
+    "test:mysensors-encoder": "export NODE_ENV=test; mocha --require @babel/register ./src/test/encoder.spec.js",
     "test:mysensors": "npm run test:mysensors-detector; npm run test:mysensors-decoder; npm run test:mysensors-encoder",
     "test": "npm run test:mysensors",
     "docs:mysensors": "jsdoc2md ./src/lib/* > ./docs/mysensors/README.md",
