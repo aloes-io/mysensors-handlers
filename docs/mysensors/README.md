@@ -17,15 +17,15 @@
 </dd>
 <dt><a href="#mySensorsDecoder">mySensorsDecoder(packet, protocol)</a> ⇒ <code>object</code></dt>
 <dd><p>Convert incoming MySensors data to Aloes Client
-pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType&quot;</p>
+pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type&quot;</p>
 </dd>
 <dt><a href="#mySensorsPatternDetector">mySensorsPatternDetector(packet)</a> ⇒ <code>object</code></dt>
 <dd><p>Check incoming MQTT packet against <a href="/mysensors/#mysensorsapi">MySensors Serial API</a>
-pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType&quot;</p>
+pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type&quot;</p>
 </dd>
 <dt><a href="#mySensorsEncoder">mySensorsEncoder(packet, protocol)</a></dt>
 <dd><p>Convert incoming Aloes Client data to <a href="/mysensors/#mysensorsapi">MySensors protocol</a>
-pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType&quot;</p>
+pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type&quot;</p>
 </dd>
 </dl>
 
@@ -99,7 +99,7 @@ Find corresponding [OMA resource](/mysensors/#omaresources) to incoming MySensor
 
 ## mySensorsDecoder(packet, protocol) ⇒ <code>object</code>
 Convert incoming MySensors data to Aloes Client
-pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
+pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
 
 **Kind**: global function  
 **Returns**: <code>object</code> - composed instance  
@@ -113,7 +113,7 @@ pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
 
 ## mySensorsPatternDetector(packet) ⇒ <code>object</code>
 Check incoming MQTT packet against [MySensors Serial API](/mysensors/#mysensorsapi)
-pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
+pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
 
 **Kind**: global function  
 **Returns**: <code>object</code> - found pattern.name and pattern.params  
@@ -127,7 +127,7 @@ pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
 
 ## mySensorsEncoder(packet, protocol)
 Convert incoming Aloes Client data to [MySensors protocol](/mysensors/#mysensorsapi)
-pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+subType"
+pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
 
 **Kind**: global function  
 

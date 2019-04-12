@@ -39,6 +39,7 @@
     "npm": ">=6.0.0"
   },
   "dependencies": {
+    "aloes-logger": "^1.0.4",
     "mqtt-pattern": "^1.2.0",
     "oma-json": "^1.0.6"
   },
@@ -73,7 +74,7 @@
     "mocha": "^5.2.0",
     "nodemon": "^1.18.8",
     "prettier": "1.16.1",
-    "vuepress": "^1.0.0-alpha.42"
+    "vuepress": "^1.0.0-alpha.47"
   },
   "peerDependencies": {
     "mqtt-pattern": "^1.2.0",
