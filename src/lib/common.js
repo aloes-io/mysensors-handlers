@@ -1,13 +1,13 @@
 /**
  * Oma Object References.
  * @external OmaObjects
- * @see {@link https://api.aloes.io/api/omaObjects}
+ * @see {@link https://aloes.io/app/api/omaObjects}
  */
 
 /**
  * Oma Resources References.
  * @external OmaResources
- * @see {@link https://api.aloes.io/api/omaResources}
+ * @see {@link https://aloes.io/app/api/omaResources}
  */
 
 /**

@@ -1,7 +1,7 @@
-import mqttPattern from 'mqtt-pattern';
-import {omaObjects, omaViews} from 'oma-json';
-import logger from 'aloes-logger';
-import protocolRef from './common';
+const mqttPattern = require('mqtt-pattern');
+const {omaObjects, omaViews} = require('oma-json');
+const logger = require('aloes-logger');
+const protocolRef = require('./common');
 
 /**
  * Find corresponding [OMA object]{@link /mysensors/#omaobjects} following a MySensors presentation message
@@ -30,7 +30,7 @@ const mySensorsToOmaObject = msg => {
     return decoded;
   } catch (error) {
     logger(2, 'mysensors-handlers', 'toOmaObject:err', error);
-    return error;
+    return null;
   }
 };
 
@@ -63,7 +63,7 @@ const mySensorsToOmaResources = msg => {
     return decoded;
   } catch (error) {
     logger(2, 'mysensors-handlers', 'toOmaResources:err', error);
-    return error;
+    return null;
   }
 };
 
@@ -150,12 +150,12 @@ const mySensorsDecoder = (packet, protocol) => {
     throw new Error("topic doesn't match");
   } catch (error) {
     logger(2, 'mysensors-handlers', 'decoder:err', error);
-    return error;
+    return null;
   }
 };
 
 module.exports = {
-  // mySensorsToOmaObject,
-  // mySensorsToOmaResources,
+  mySensorsToOmaObject,
+  mySensorsToOmaResources,
   mySensorsDecoder,
 };

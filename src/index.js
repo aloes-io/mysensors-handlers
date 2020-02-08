@@ -1,6 +1,6 @@
-import {mySensorsEncoder} from './lib/encoder';
-import {mySensorsDecoder} from './lib/decoder';
-import {mySensorsPatternDetector} from './lib/detector';
+const {mySensorsEncoder} = require('./lib/encoder');
+const {mySensorsDecoder} = require('./lib/decoder');
+const {mySensorsPatternDetector} = require('./lib/detector');
 
 module.exports = {
 	mySensorsEncoder,

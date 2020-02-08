@@ -142,14 +142,14 @@ pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
 Oma Object References.
 
 **Kind**: global external  
-**See**: [https://api.aloes.io/api/omaObjects](https://api.aloes.io/api/omaObjects)  
+**See**: [https://aloes.io/app/api/omaObjects](https://aloes.io/app/api/omaObjects)  
 <a name="external_OmaResources"></a>
 
 ## OmaResources
 Oma Resources References.
 
 **Kind**: global external  
-**See**: [https://api.aloes.io/api/omaResources](https://api.aloes.io/api/omaResources)  
+**See**: [https://aloes.io/app/api/omaResources](https://aloes.io/app/api/omaResources)  
 <a name="external_MySensorsAPI"></a>
 
 ## MySensorsAPI

@@ -1,6 +1,6 @@
-import mqttPattern from 'mqtt-pattern';
-import logger from 'aloes-logger';
-import protocolRef from './common';
+const mqttPattern = require('mqtt-pattern');
+const logger = require('aloes-logger');
+const protocolRef = require('./common');
 
 /**
  * Check incoming MQTT packet against [MySensors Serial API]{@link /mysensors/#mysensorsapi}
@@ -13,7 +13,10 @@ import protocolRef from './common';
 const mySensorsPatternDetector = packet => {
   try {
     const pattern = {name: 'empty', params: {}};
-    if (packet.topic && mqttPattern.matches(protocolRef.pattern, packet.topic)) {
+    if (
+      packet.topic &&
+      mqttPattern.matches(protocolRef.pattern, packet.topic)
+    ) {
       logger(4, 'mysensors-handlers', 'patternDetector:res', 'reading API ...');
       const mysensorsProtocol = mqttPattern.exec(
         protocolRef.pattern,
@@ -53,12 +56,8 @@ const mySensorsPatternDetector = packet => {
     }
     return pattern;
   } catch (error) {
-    let err = error;
-    if (!err) {
-      err = new Error('Error: invalid packet');
-    }
-    logger(2, 'mysensors-handlers', 'patternDetector:err', err);
-    return err;
+    logger(2, 'mysensors-handlers', 'patternDetector:err', error);
+    return null;
   }
 };
 

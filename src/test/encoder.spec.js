@@ -1,8 +1,6 @@
-require('@babel/register');
-
-import {assert} from 'chai';
-import {mySensorsEncoder} from '../lib/encoder';
-import {mySensorsPatternDetector} from '../lib/detector';
+const {assert} = require('chai');
+const {mySensorsEncoder} = require('../lib/encoder');
+const {mySensorsPatternDetector} = require('../lib/detector');
 
 //  const mySensorsPattern = "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type";
 
