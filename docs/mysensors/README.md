@@ -4,26 +4,38 @@
 <dt><a href="#protocolRef">protocolRef</a> : <code>object</code></dt>
 <dd><p>References used to validate <a href="/mysensors/#mysensorsapi">MySensors</a> payloads</p>
 </dd>
+<dt><a href="#labelsCommand">labelsCommand</a> : <code>object</code></dt>
+<dd><p>Labels used in Mysensors message to identify commands.</p>
+</dd>
+<dt><a href="#labelsPresentation">labelsPresentation</a> : <code>object</code></dt>
+<dd><p>Labels used in Mysensors message to identify sensor type in presentation commands.</p>
+</dd>
+<dt><a href="#labelsSet">labelsSet</a> : <code>object</code></dt>
+<dd><p>Labels used in Mysensors message to identify sensor type in Set/req commands.</p>
+</dd>
+<dt><a href="#labelsInternal">labelsInternal</a> : <code>object</code></dt>
+<dd><p>Labels used in Mysensors message to identify sensor type in Internal commands.</p>
+</dd>
 </dl>
 
 ## Functions
 
 <dl>
-<dt><a href="#mySensorsToOmaObject">mySensorsToOmaObject(msg)</a> ⇒ <code>object</code></dt>
+<dt><a href="#mySensorsToOmaObject">mySensorsToOmaObject(msg)</a> ⇒ <code>object</code> | <code>null</code></dt>
 <dd><p>Find corresponding <a href="/mysensors/#omaobjects">OMA object</a> following a MySensors presentation message</p>
 </dd>
-<dt><a href="#mySensorsToOmaResources">mySensorsToOmaResources(msg)</a> ⇒ <code>object</code></dt>
+<dt><a href="#mySensorsToOmaResources">mySensorsToOmaResources(msg)</a> ⇒ <code>object</code> | <code>null</code></dt>
 <dd><p>Find corresponding <a href="/mysensors/#omaresources">OMA resource</a> to incoming MySensors datas</p>
 </dd>
-<dt><a href="#mySensorsDecoder">mySensorsDecoder(packet, protocol)</a> ⇒ <code>object</code></dt>
+<dt><a href="#mySensorsDecoder">mySensorsDecoder(packet, protocol)</a> ⇒ <code>object</code> | <code>null</code></dt>
 <dd><p>Convert incoming MySensors data to Aloes Client
 pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type&quot;</p>
 </dd>
-<dt><a href="#mySensorsPatternDetector">mySensorsPatternDetector(packet)</a> ⇒ <code>object</code></dt>
+<dt><a href="#mySensorsPatternDetector">mySensorsPatternDetector(packet)</a> ⇒ <code>object</code> | <code>null</code></dt>
 <dd><p>Check incoming MQTT packet against <a href="/mysensors/#mysensorsapi">MySensors Serial API</a>
 pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type&quot;</p>
 </dd>
-<dt><a href="#mySensorsEncoder">mySensorsEncoder(packet, protocol)</a></dt>
+<dt><a href="#mySensorsEncoder">mySensorsEncoder(instance, protocol)</a> ⇒ <code>object</code> | <code>null</code></dt>
 <dd><p>Convert incoming Aloes Client data to <a href="/mysensors/#mysensorsapi">MySensors protocol</a>
 pattern - &quot;+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type&quot;</p>
 </dd>
@@ -57,27 +69,75 @@ References used to validate [MySensors](/mysensors/#mysensorsapi) payloads
 | validators | <code>object</code> | Check inputs / build outputs |
 | validators.nodeId | <code>array</code> |  |
 | validators.methods | <code>array</code> | [0, 1, 2, 3, 4]. |
-| labelsPresentation | <code>array</code> | Labels used by Mysensors to identify sensor type in presentation commands. |
-| labelsPresentation[0].Type | <code>string</code> | [MySensors](/mysensors/#mysensorsapi) Type |
-| labelsPresentation[0].value | <code>int</code> | MySensors Type value ( used by transport ) |
-| labelsPresentation[0].omaObject | <code>int</code> | [OMA Object](/mysensors/#omaobjects) ID |
-| labelsPresentation[0].description | <code>string</code> | MySensors Type description |
-| labelsPresentation[0].resources | <code>string</code> | MySensors variable subtype used by this type |
-| labelsSet | <code>array</code> | Labels used by Mysensors to identify sensor type in Set/req commands. |
-| labelsSet[0].Type | <code>string</code> | MySensors subtype |
-| labelsSet[0].value | <code>int</code> | MySensors Subype value ( used by transport ) |
-| labelsSet[0].omaResources | <code>object</code> | [OMA Resources](/mysensors/#omaresources) attached to `labelsPresentation[0].omaObject` |
-| labelsSet[0].Unit | <code>string</code> | Sensor value unit |
-| labelsSet[0].description | <code>string</code> | MySensors Subtype description |
-| labelsSet[0].sensorTypes | <code>string</code> | MySensors Type using this variable |
+
+<a name="labelsCommand"></a>
+
+## labelsCommand : <code>object</code>
+Labels used in Mysensors message to identify commands.
+
+**Kind**: global namespace  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| Type | <code>string</code> | [MySensors](/mysensors/#mysensorsapi) Type |
+| value | <code>number</code> | MySensors Type value ( used by transport ) |
+| description | <code>string</code> | MySensors Type description |
+
+<a name="labelsPresentation"></a>
+
+## labelsPresentation : <code>object</code>
+Labels used in Mysensors message to identify sensor type in presentation commands.
+
+**Kind**: global namespace  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| Type | <code>string</code> | [MySensors](/mysensors/#mysensorsapi) Type |
+| value | <code>number</code> | MySensors Type value ( used by transport ) |
+| omaObject | <code>number</code> | [OMA Object](/mysensors/#omaobjects) ID |
+| description | <code>string</code> | MySensors Type description |
+| resources | <code>Array.&lt;string&gt;</code> | MySensors variable subtype used by this type |
+
+<a name="labelsSet"></a>
+
+## labelsSet : <code>object</code>
+Labels used in Mysensors message to identify sensor type in Set/req commands.
+
+**Kind**: global namespace  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| Type | <code>string</code> | MySensors subtype |
+| value | <code>number</code> | MySensors Subype value ( used by transport ) |
+| omaResources | <code>object</code> | [OMA Resources](/mysensors/#omaresources) attached to `labelsPresentation[0].omaObject` |
+| Unit | <code>string</code> | Sensor value unit |
+| description | <code>string</code> | MySensors Subtype description |
+| sensorTypes | <code>Array.&lt;string&gt;</code> | MySensors Type(s) using this variable |
+
+<a name="labelsInternal"></a>
+
+## labelsInternal : <code>object</code>
+Labels used in Mysensors message to identify sensor type in Internal commands.
+
+**Kind**: global namespace  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| Type | <code>string</code> | MySensors subtype |
+| value | <code>number</code> | MySensors Subype value ( used by transport ) |
+| description | <code>string</code> | MySensors Subtype description |
 
 <a name="mySensorsToOmaObject"></a>
 
-## mySensorsToOmaObject(msg) ⇒ <code>object</code>
+## mySensorsToOmaObject(msg) ⇒ <code>object</code> \| <code>null</code>
 Find corresponding [OMA object](/mysensors/#omaobjects) following a MySensors presentation message
 
 **Kind**: global function  
-**Returns**: <code>object</code> - composed instance  
+**Returns**: <code>object</code> \| <code>null</code> - sensor  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -85,11 +145,11 @@ Find corresponding [OMA object](/mysensors/#omaobjects) following a MySensors pr
 
 <a name="mySensorsToOmaResources"></a>
 
-## mySensorsToOmaResources(msg) ⇒ <code>object</code>
+## mySensorsToOmaResources(msg) ⇒ <code>object</code> \| <code>null</code>
 Find corresponding [OMA resource](/mysensors/#omaresources) to incoming MySensors datas
 
 **Kind**: global function  
-**Returns**: <code>object</code> - composed instance  
+**Returns**: <code>object</code> \| <code>null</code> - sensor  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -97,12 +157,12 @@ Find corresponding [OMA resource](/mysensors/#omaresources) to incoming MySensor
 
 <a name="mySensorsDecoder"></a>
 
-## mySensorsDecoder(packet, protocol) ⇒ <code>object</code>
+## mySensorsDecoder(packet, protocol) ⇒ <code>object</code> \| <code>null</code>
 Convert incoming MySensors data to Aloes Client
 pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
 
 **Kind**: global function  
-**Returns**: <code>object</code> - composed instance  
+**Returns**: <code>object</code> \| <code>null</code> - sensor  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -111,12 +171,12 @@ pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
 
 <a name="mySensorsPatternDetector"></a>
 
-## mySensorsPatternDetector(packet) ⇒ <code>object</code>
+## mySensorsPatternDetector(packet) ⇒ <code>object</code> \| <code>null</code>
 Check incoming MQTT packet against [MySensors Serial API](/mysensors/#mysensorsapi)
 pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
 
 **Kind**: global function  
-**Returns**: <code>object</code> - found pattern.name and pattern.params  
+**Returns**: <code>object</code> \| <code>null</code> - pattern  
 **Mthod**: mySensorsPatternDetector  
 
 | Param | Type | Description |
@@ -125,16 +185,21 @@ pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
 
 <a name="mySensorsEncoder"></a>
 
-## mySensorsEncoder(packet, protocol)
+## mySensorsEncoder(instance, protocol) ⇒ <code>object</code> \| <code>null</code>
 Convert incoming Aloes Client data to [MySensors protocol](/mysensors/#mysensorsapi)
 pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
 
 **Kind**: global function  
+**Returns**: <code>object</code> \| <code>null</code> - packet  
+**Throws**:
+
+- <code>Error</code> 'Wrong protocol input'
+
 
 | Param | Type | Description |
 | --- | --- | --- |
-| packet | <code>object</code> | Sensor instance. |
-| protocol | <code>object</code> | Protocol paramters ( coming from patternDetector ). |
+| instance | <code>object</code> | Sensor instance. |
+| protocol | <code>object</code> | Protocol parameters ( coming from patternDetector ). |
 
 <a name="external_OmaObjects"></a>
 

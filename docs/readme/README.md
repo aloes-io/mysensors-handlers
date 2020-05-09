@@ -15,12 +15,6 @@ With npm :
 $ npm install mysensors-handlers --save
 ```
 
-Via script tag :
-
-```html
-<script src="https://unpkg.com/mysensors-handlers"></script>
-```
-
 ## Linting
 
 With ESLint
@@ -48,12 +42,4 @@ $ npm run docs:dev
 ```bash
 $ npm run docs:build
 $ npm run docs:serve
-```
-
-## Build
-
-With Babel
-
-```bash
-$ npm run build-lib
 ```
