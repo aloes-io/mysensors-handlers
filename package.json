@@ -1,6 +1,6 @@
 {
   "name": "mysensors-handlers",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Encode / decode MQTT stream from Devices using MySensors protocol",
   "main": "./src/index.js",
   "scripts": {
