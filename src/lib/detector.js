@@ -1,16 +1,21 @@
 const mqttPattern = require('mqtt-pattern');
 const logger = require('aloes-logger');
-const protocolRef = require('./common');
+const {
+  protocolRef,
+  labelsPresentation,
+  labelsSet,
+  labelsInternal,
+} = require('./common');
 
 /**
  * Check incoming MQTT packet against [MySensors Serial API]{@link /mysensors/#mysensorsapi}
  * pattern - "+prefixedDevEui/+nodeId/+sensorId/+method/+ack/+type"
  * @mthod mySensorsPatternDetector
  * @param {object} packet - The MQTT packet.
- * @returns {object} found pattern.name and pattern.params
+ * @returns {object | null} pattern
  */
 
-const mySensorsPatternDetector = packet => {
+const mySensorsPatternDetector = (packet) => {
   try {
     const pattern = {name: 'empty', params: {}};
     if (
@@ -24,24 +29,18 @@ const mySensorsPatternDetector = packet => {
       );
       logger(3, 'mysensors-handlers', 'patternDetector:res', mysensorsProtocol);
       let typeExists = false;
+      const method = Number(mysensorsProtocol.method);
+      const type = Number(mysensorsProtocol.type);
+
       const methodExists = protocolRef.validators.methods.some(
-        meth => meth === Number(mysensorsProtocol.method),
+        (meth) => meth === method,
       );
-      if (Number(mysensorsProtocol.method) === 0) {
-        typeExists = protocolRef.labelsPresentation.some(
-          label => label.value === Number(mysensorsProtocol.type),
-        );
-      } else if (
-        Number(mysensorsProtocol.method) > 0 &&
-        Number(mysensorsProtocol.method) < 3
-      ) {
-        typeExists = protocolRef.labelsSet.some(
-          label => label.value === Number(mysensorsProtocol.type),
-        );
-      } else if (Number(mysensorsProtocol.method) === 3) {
-        typeExists = protocolRef.labelsInternal.some(
-          label => label.value === Number(mysensorsProtocol.type),
-        );
+      if (method === 0) {
+        typeExists = labelsPresentation.some(({value}) => value === type);
+      } else if (method > 0 && method < 3) {
+        typeExists = labelsSet.some(({value}) => value === type);
+      } else if (method === 3) {
+        typeExists = labelsInternal.some(({value}) => value === type);
       }
       logger(3, 'mysensors-handlers', 'patternDetector:res', {
         methodExists,
