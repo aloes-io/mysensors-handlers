@@ -49,7 +49,7 @@
     "light-server": "^2.6.4",
     "mocha": "^7.1.2",
     "prettier": "^2.0.5",
-    "vuepress": "^1.4.1"
+    "vuepress": "^1.5.4"
   },
   "prettier": {
     "bracketSpacing": false,
